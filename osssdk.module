@@ -73,7 +73,7 @@ function osssdk_requirements($phase) {
       'description' => $t('Please make sure the OSS SDK library is installed in the libraries directory.'),
     );
   }
-  else if(!$info['version'] || version_compare($info['version'], OSSSDK_MINIMUM_VERSION) < 0) {
+  elseif (!$info['version'] || version_compare($info['version'], OSSSDK_MINIMUM_VERSION) < 0) {
     $requirements['osssdk'] = array(
       'severity' => REQUIREMENT_ERROR,
       'title' => $t('OSS SDK'),
