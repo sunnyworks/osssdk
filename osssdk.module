@@ -1,0 +1,102 @@
+<?php
+/**
+ * @file
+ * Provides primary Drupal hook implementations.
+ *
+ * @author Sawyer Chen ("csunny", http://drupal.org/user/784606)
+ */
+
+/**
+ * Denotes "OSS SDK for PHP" minimum version number.
+ */
+define('OSSSDK_MINIMUM_VERSION', '1.1.5');
+
+/**
+ * Implements hook_menu().
+ */
+function osssdk_menu() {
+  $items = array();
+
+  $items['admin/config/media/osssdk'] = array(
+    'title' => 'OSS SDK',
+    'description' => 'Configure the Aliyun OSS Services settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osssdk_settings_form'),
+    'access arguments' => array('access administration pages'),
+    'file' => 'osssdk.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_libraries_info()
+ */
+function osssdk_libraries_info() {
+  return array(
+    'osssdk' => array(
+      'title' => 'OSS SDK for PHP',
+      'vendor url' => 'http://dev.aliyun.com/',
+      'download url' => 'http://dev.aliyun.com/',
+      'version arguments' => array(
+        'file' => 'sdk.class.php',
+        'pattern' => "/define\('OSS_VERSION','(.*)'\);/",
+        'lines' => 200,
+      ),
+      'files' => array(
+        'php' => array(
+          'sdk.class.php',
+        ),
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_requirements()
+ */
+function osssdk_requirements($phase) {
+  $t = get_t();
+  $requirements = array();
+
+  // None of these requirements are relevant outside of runtime.
+  if ($phase != 'runtime') {
+    return $requirements;
+  }
+
+  $info = libraries_load('osssdk');
+  if (!$info['loaded']) {
+    $requirements['osssdk'] = array(
+      'severity' => REQUIREMENT_ERROR,
+      'title' => $t('OSS SDK'),
+      'value' => $t('Failed to load the OSS SDK'),
+      'description' => $t('Please make sure the OSS SDK library is installed in the libraries directory.'),
+    );
+  }
+  else if(!$info['version'] || version_compare($info['version'], OSSSDK_MINIMUM_VERSION) < 0) {
+    $requirements['osssdk'] = array(
+      'severity' => REQUIREMENT_ERROR,
+      'title' => $t('OSS SDK'),
+      'value' => $info['version'],
+      'description' => $t('Please make sure the OSS SDK library installed is ' . OSSSDK_MINIMUM_VERSION . ' or greater.'),
+    );
+  }
+  else {
+    $requirements['osssdk'] = array(
+      'severity' => REQUIREMENT_OK,
+      'title' => $t('OSS SDK'),
+      'value' => $info['version'],
+    );
+
+    // Ensure that the two required id/secret fields have been set.
+    if (variable_get('oss_key_id', '') == '' || variable_get('oss_key_secret', '') == '') {
+      $requirements['osssdk']['severity'] = REQUIREMENT_WARNING;
+      $requirements['osssdk']['description'] = $t('The required OSS SDK access key id and secret have not been set.');
+
+      // Add link to configuration form
+      $requirements['osssdk']['description'] .= ' [' . l(t('configuration'), 'admin/config/media/osssdk') . ']';
+    }
+  }
+
+  return $requirements;
+}
