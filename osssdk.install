@@ -1,0 +1,25 @@
+<?php
+/**
+ * @file
+ * Provides installation functions.
+ *
+ * @author Sawyer Chen ("csunny", http://drupal.org/user/784606)
+ */
+
+/*
+ * Implements hook_install().
+ */
+function osssdk_install() {
+  // Add all variables.
+  variable_set('oss_key_id', '');
+  variable_set('oss_key_secret', '');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function osssdk_uninstall() {
+  // Remove all variables.
+  variable_del('oss_key_id');
+  variable_del('oss_key_secret');
+}
