@@ -26,13 +26,7 @@ function osssdk_settings_form($form, &$form_state) {
     '#default_value' => variable_get('oss_key_secret', ''),
     '#required' => TRUE,
   );
-  $form['#submit'][] = 'osssdk_settings_form_submit';
+
   return system_settings_form($form);
 }
 
-/**
- * Clear config cache to new settings take effect.
- */
-function osssdk_settings_form_submit($form, &$form_state) {
-  cache_clear_all('osssdk_config_load', 'cache');
-}
