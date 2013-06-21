@@ -2,8 +2,6 @@
 /**
  * @file
  * Provides installation functions.
- *
- * @author Sawyer Chen ("csunny", http://drupal.org/user/784606)
  */
 
 /*
@@ -11,8 +9,8 @@
  */
 function osssdk_install() {
   // Add all variables.
-  variable_set('oss_key_id', '');
-  variable_set('oss_key_secret', '');
+  variable_set('osssdk_key_id', '');
+  variable_set('osssdk_key_secret', '');
 }
 
 /**
@@ -20,8 +18,8 @@ function osssdk_install() {
  */
 function osssdk_uninstall() {
   // Remove all variables.
-  variable_del('oss_key_id');
-  variable_del('oss_key_secret');
+  variable_del('osssdk_key_id');
+  variable_del('osssdk_key_secret');
 }
 
 /**
@@ -61,7 +59,7 @@ function osssdk_requirements($phase) {
     );
 
     // Ensure that the two required id/secret fields have been set.
-    if (variable_get('oss_key_id', '') == '' || variable_get('oss_key_secret', '') == '') {
+    if (variable_get('osssdk_key_id', '') == '' || variable_get('osssdk_key_secret', '') == '') {
       $requirements['osssdk']['severity'] = REQUIREMENT_WARNING;
       $requirements['osssdk']['description'] = $t('The required OSS SDK access key id and secret have not been set.');
 

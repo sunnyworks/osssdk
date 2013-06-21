@@ -2,8 +2,6 @@
 /**
  * @file
  * Provides OSS SDK configuration form.
- *
- * @author Sawyer Chen ("csunny", http://drupal.org/user/784606)
  */
 
 /**
@@ -17,13 +15,13 @@ function osssdk_settings_form($form, &$form_state) {
   $form['required']['oss_key_id'] = array(
     '#type' => 'textfield',
     '#title' => t('Aliyun OSS Access Key ID'),
-    '#default_value' => variable_get('oss_key_id', ''),
+    '#default_value' => variable_get('osssdk_key_id', ''),
     '#required' => TRUE,
   );
   $form['required']['oss_key_secret'] = array(
     '#type' => 'textfield',
     '#title' => t('Aliyun OSS Access Key Secret'),
-    '#default_value' => variable_get('oss_key_secret', ''),
+    '#default_value' => variable_get('osssdk_key_secret', ''),
     '#required' => TRUE,
   );
 
