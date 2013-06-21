@@ -64,7 +64,7 @@ function osssdk_requirements($phase) {
       $requirements['osssdk']['description'] = $t('The required OSS SDK access key id and secret have not been set.');
 
       // Add link to configuration form.
-      $requirements['osssdk']['description'] .= ' [' . l(t('configuration'), 'admin/config/media/osssdk') . ']';
+      $requirements['osssdk']['description'] .= ' [' . l($t('configuration'), 'admin/config/media/osssdk') . ']';
     }
   }
 
