@@ -4,11 +4,10 @@
  * Provides installation functions.
  */
 
-/*
+/**
  * Implements hook_install().
  */
 function osssdk_install() {
-  // Add all variables.
   variable_set('osssdk_key_id', '');
   variable_set('osssdk_key_secret', '');
 }
