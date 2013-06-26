@@ -12,13 +12,13 @@ function osssdk_settings_form($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => t('Aliyun OSS Access Key Info'),
   );
-  $form['required']['oss_key_id'] = array(
+  $form['required']['osssdk_key_id'] = array(
     '#type' => 'textfield',
     '#title' => t('Aliyun OSS Access Key ID'),
     '#default_value' => variable_get('osssdk_key_id', ''),
     '#required' => TRUE,
   );
-  $form['required']['oss_key_secret'] = array(
+  $form['required']['osssdk_key_secret'] = array(
     '#type' => 'textfield',
     '#title' => t('Aliyun OSS Access Key Secret'),
     '#default_value' => variable_get('osssdk_key_secret', ''),
