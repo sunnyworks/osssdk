@@ -5,23 +5,6 @@
  */
 
 /**
- * Implements hook_install().
- */
-function osssdk_install() {
-  variable_set('osssdk_key_id', '');
-  variable_set('osssdk_key_secret', '');
-}
-
-/**
- * Implements hook_uninstall().
- */
-function osssdk_uninstall() {
-  // Remove all variables.
-  variable_del('osssdk_key_id');
-  variable_del('osssdk_key_secret');
-}
-
-/**
  * Implements hook_requirements().
  */
 function osssdk_requirements($phase) {
@@ -57,14 +40,6 @@ function osssdk_requirements($phase) {
       'value' => $info['version'],
     );
 
-    // Ensure that the two required id/secret fields have been set.
-    if (variable_get('osssdk_key_id', '') == '' || variable_get('osssdk_key_secret', '') == '') {
-      $requirements['osssdk']['severity'] = REQUIREMENT_WARNING;
-      $requirements['osssdk']['description'] = $t('The required OSS SDK access key id and secret have not been set.');
-
-      // Add link to configuration form.
-      $requirements['osssdk']['description'] .= ' [' . l($t('configuration'), 'admin/config/media/osssdk') . ']';
-    }
   }
 
   return $requirements;
