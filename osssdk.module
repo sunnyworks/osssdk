@@ -10,6 +10,24 @@
 define('OSSSDK_MINIMUM_VERSION', '1.1.5');
 
 /**
+ * Implements hook_menu().
+ */
+function osssdk_menu() {
+  $items = array();
+
+  $items['admin/config/media/osssdk'] = array(
+    'title' => 'OSS SDK',
+    'description' => 'Configure the Aliyun OSS Services settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('osssdk_settings_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'osssdk.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
  * Implements hook_libraries_info().
  */
 function osssdk_libraries_info() {
