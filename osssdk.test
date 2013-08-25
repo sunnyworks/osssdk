@@ -8,7 +8,7 @@ class OSSSDKUnitTest extends DrupalUnitTestCase {
 
   /**
    * Provide simpletest info.
-  */
+   */
   public static function getInfo() {
     // Note: getInfo() strings should not be translated.
     return array(
