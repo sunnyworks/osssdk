@@ -1,0 +1,31 @@
+<?php
+
+class OSSSDKUnitTest extends DrupalUnitTestCase {
+  public static function getInfo() {
+    // Note: getInfo() strings should not be translated.
+    return array(
+      'name' => 'OSS SDK',
+      'description' => 'Ensure that OSS SDK libraries integration and configuration work properly.',
+      'group' => 'OSS SDK',
+    );
+  }
+
+  /**
+   * Ensure that OSS SDK libraries integration and configuration work properly.
+   */
+  function testLibrary() {
+    global $conf;
+
+    // Ensure the requirements check out properly and configuration settings
+    // were success loaded since osssdk_requirements() checks for them.
+    require_once 'includes/install.inc';
+    require_once 'osssdk.install';
+    $requirements = osssdk_requirements('runtime');
+    if (!$this->assertEqual($requirements['osssdk']['severity'], REQUIREMENT_OK, 'OSS SDK library loaded and compatible.')) {
+      return;
+    }
+    $info = libraries_load('osssdk');
+    $this->assertTrue($info['version'], 'Version detected (' . $info['version'] . ').');
+  }
+}
+?>

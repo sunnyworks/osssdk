@@ -3,3 +3,4 @@ description = The OSS SDK for PHP provides a library for developers working with
 package = Libraries
 core = 7.x
 dependencies[] = libraries (>= 2.0)
+files[] = osssdk.test
