@@ -4,11 +4,6 @@
  * Provides installation functions.
  */
 
-/**
- * Implements hook_install().
- */
-function osssdk_install() {
-}
 
 /**
  * Implements hook_uninstall().
