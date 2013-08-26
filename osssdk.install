@@ -8,8 +8,6 @@
  * Implements hook_install().
  */
 function osssdk_install() {
-  variable_set('osssdk_key_id', '');
-  variable_set('osssdk_key_secret', '');
 }
 
 /**
