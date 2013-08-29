@@ -33,5 +33,6 @@ class OSSSDKUnitTest extends DrupalUnitTestCase {
     }
     $info = libraries_load('osssdk');
     $this->assertTrue($info['version'], 'Version detected (' . $info['version'] . ').');
+    $this->assertTrue(defined('OSS_NAME') && OSS_NAME == 'oss-sdk-php', 'Library integration file sdk.class.php loaded. ');
   }
 }
